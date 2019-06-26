@@ -6,17 +6,14 @@ LABEL Description="Base image for hadoop cluster"
 
 ARG HADOOP_VERSION=
 
-#install packages
-RUN \
-  apt-get update && \
-  apt-get install -y \
-  ssh \  
-  nano \
-  openjdk-8-jdk \
-  wget \
-  openssh-server \
-  openssh-client \
-  tar
+#COPY ssh config
+# copy ssh config
+ADD confs-files/ssh-config /root/.ssh/config
+
+#COPY confs-files
+ADD confs-files/core-site.xml $HADOOP_HOME/etc/hadoop/
+ADD confs-files/mapred-site.xml $HADOOP_HOME/etc/hadoop/
+ADD confs-files/yarn-site.xml $HADOOP_HOME/etc/hadoop/
 
 #env vars needed
 ENV HADOOP_HOME /opt/hadoop
@@ -35,6 +32,18 @@ ENV HADOOP_CLASSPATH=$HADOOP_CONF_DIR,$HADOOP_COMMON_HOME/*,$HADOOP_COMMON_HOME/
 ENV PATH=$PATH:$JAVA_HOME:$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$HADOOP_CLASSPATH
 ENV HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib/native"
 
+#install packages
+RUN \
+  apt-get update && \
+  apt-get install -y \
+  ssh \  
+  nano \
+  openjdk-8-jdk \
+  wget \
+  openssh-server \
+  openssh-client \
+  tar
+
 #download hadoop
 RUN \
   wget http://apache.mirrors.tds.net/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz && \
@@ -49,15 +58,6 @@ RUN \
   ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa && \
   cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys && \
   chmod 0600 ~/.ssh/authorized_keys
-
-#COPY ssh config
-# copy ssh config
-ADD confs-files/ssh-config /root/.ssh/config
-
-#COPY confs-files
-ADD confs-files/core-site.xml $HADOOP_HOME/etc/hadoop/
-ADD confs-files/mapred-site.xml $HADOOP_HOME/etc/hadoop/
-ADD confs-files/yarn-site.xml $HADOOP_HOME/etc/hadoop/
 
 # Hdfs ports
 EXPOSE 50010 50020 50070 50075 50090 8020 9000
