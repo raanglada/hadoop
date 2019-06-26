@@ -39,7 +39,7 @@ RUN \
 
 #COPY ssh config
 # copy ssh config
-ADD configs-file/ssh_config /root/.ssh/config
+ADD configs-file/ssh-config /root/.ssh/config
 
 #COPY confs-files
 ADD confs-files/core-site.xml $HADOOP_HOME/etc/hadoop/
