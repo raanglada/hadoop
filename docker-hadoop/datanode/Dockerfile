@@ -1,5 +1,5 @@
 
-From raanglada/hadoop-base
+From raanglada/hadoop-base:2.9.2
 
 MAINTAINER Anglada <anglada.alex@gmail.com>
 
