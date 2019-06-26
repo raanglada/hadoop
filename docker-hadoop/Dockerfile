@@ -25,17 +25,17 @@ ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 #download hadoop
 RUN \
   wget http://apache.mirrors.tds.net/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz && \
-  tar -xzf hadoop-${HADOOP_VERSION}.tar.gz && \
+  tar -xvzf hadoop-${HADOOP_VERSION}.tar.gz && \
   mv hadoop-${HADOOP_VERSION} $HADOOP_HOME && \
   echo "export JAVA_HOME=$JAVA_HOME" >> $HADOOP_HOME/etc/hadoop/hadoop-env.sh && \
   echo "PATH=$PATH:$HADOOP_HOME/bin" >> ~/.bashrc && \
   rm hadoop-${HADOOP_VERSION}.tar.gz
 
 # Passwordless SSH
-RUN ssh-keygen -q -N "" -t dsa -f /etc/ssh/ssh_host_dsa_key
-RUN ssh-keygen -q -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key
-RUN ssh-keygen -q -N "" -t rsa -f /root/.ssh/id_rsa
-RUN cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys
+RUN \
+  ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa && \
+  cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys && \
+  chmod 0600 ~/.ssh/authorized_keys
 
 #COPY ssh config
 # copy ssh config
