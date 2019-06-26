@@ -6,15 +6,6 @@ LABEL Description="Base image for hadoop cluster"
 
 ARG HADOOP_VERSION=
 
-#COPY ssh config
-# copy ssh config
-ADD confs-files/ssh-config /root/.ssh/config
-
-#COPY confs-files
-ADD confs-files/core-site.xml $HADOOP_HOME/etc/hadoop/
-ADD confs-files/mapred-site.xml $HADOOP_HOME/etc/hadoop/
-ADD confs-files/yarn-site.xml $HADOOP_HOME/etc/hadoop/
-
 #env vars needed
 ENV HADOOP_HOME /opt/hadoop
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
@@ -58,6 +49,15 @@ RUN \
   ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa && \
   cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys && \
   chmod 0600 ~/.ssh/authorized_keys
+
+#COPY ssh config
+# copy ssh config
+ADD confs-files/ssh-config /root/.ssh/config
+
+#COPY confs-files
+ADD confs-files/core-site.xml $HADOOP_HOME/etc/hadoop/
+ADD confs-files/mapred-site.xml $HADOOP_HOME/etc/hadoop/
+ADD confs-files/yarn-site.xml $HADOOP_HOME/etc/hadoop/
 
 # Hdfs ports
 EXPOSE 50010 50020 50070 50075 50090 8020 9000
