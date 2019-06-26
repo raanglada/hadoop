@@ -1,3 +1,4 @@
+#!/bin/bash
 
 export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
 export HADOOP_COMMON_HOME=$HADOOP_HOME
