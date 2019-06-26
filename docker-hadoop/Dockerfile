@@ -1,4 +1,3 @@
-#From java:8-jre
 From debian:latest
 
 MAINTAINER Anglada <anglada.alex@gmail.com>
@@ -6,16 +5,18 @@ MAINTAINER Anglada <anglada.alex@gmail.com>
 LABEL Description="Base image for hadoop cluster"
 
 ARG HADOOP_VERSION=
-ARG ROLE=namenode
 
 #install packages
 RUN \
-  apt-get update && apt-get install -y \
-  ssh \
-  rsync \
-  vim \
+  apt-get update && \
+  apt-get install -y \
+  ssh \  
+  nano \
   openjdk-8-jdk \
-  wget openssh-server openssh-clients tar
+  wget \
+  openssh-server \
+  openssh-client \
+  tar
 
 #env vars needed
 ENV HADOOP_HOME /opt/hadoop
@@ -27,7 +28,8 @@ RUN \
   tar -xzf hadoop-${HADOOP_VERSION}.tar.gz && \
   mv hadoop-${HADOOP_VERSION} $HADOOP_HOME && \
   echo "export JAVA_HOME=$JAVA_HOME" >> $HADOOP_HOME/etc/hadoop/hadoop-env.sh && \
-  echo "PATH=$PATH:$HADOOP_HOME/bin" >> ~/.bashrc
+  echo "PATH=$PATH:$HADOOP_HOME/bin" >> ~/.bashrc && \
+  rm hadoop-${HADOOP_VERSION}.tar.gz
 
 # Passwordless SSH
 RUN ssh-keygen -q -N "" -t dsa -f /etc/ssh/ssh_host_dsa_key
