@@ -1,6 +1,7 @@
 #!/bin/bash
 
 hdfs namenode -format
+/etc/init.d/ssh start
 
 $HADOOP_HOME/sbin/start-dfs.sh
 $HADOOP_HOME/sbin/start-yarn.sh
