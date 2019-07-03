@@ -11,7 +11,7 @@ services:
   datanode:
     build:
       context: .
-      dockerfile: ./datanodeDockerfile
+      dockerfile: ./datanode/Dockerfile
     image: raanglada/hadoop-datanode
     container_name: datanode-nodemanager
     #restart: always    
