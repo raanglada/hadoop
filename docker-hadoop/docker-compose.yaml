@@ -6,7 +6,11 @@ services:
       dockerfile: ./nn-rm/Dockerfile 
     image: raanglada/hadoop-namenode  
     container_name: namenode-rmanager
-    #restart: always   
+    restart: always
+    ports:
+      - 50070:50070
+      - 8088:8088 
+      - 19888:1988  
 
   datanode:
     build:
@@ -14,5 +18,6 @@ services:
       dockerfile: ./datanode/Dockerfile
     image: raanglada/hadoop-datanode
     container_name: datanode-nodemanager
-    #restart: always    
+    restart: always       
+      
     
