@@ -4,8 +4,7 @@ services:
     build:
       context: .      
       dockerfile: ./nn-rm/Dockerfile 
-    image: raanglada/hadoop-namenode  
-    container_name: namenode-rmanager
+    image: raanglada/hadoop-namenode    
     restart: always
     ports:
       - 50070:50070
@@ -16,8 +15,7 @@ services:
     build:
       context: .
       dockerfile: ./datanode/Dockerfile
-    image: raanglada/hadoop-datanode
-    container_name: datanode-nodemanager
+    image: raanglada/hadoop-datanode    
     restart: always       
       
     
