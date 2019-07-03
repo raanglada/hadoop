@@ -1,0 +1,18 @@
+version: '3'
+services:
+  namenode:
+    build:
+      context: .      
+      dockerfile: ./nn-rm/Dockerfile 
+    image: raanglada/hadoop-namenode  
+    container_name: namenode-rmanager
+    #restart: always   
+
+  datanode:
+    build:
+      context: .
+      dockerfile: ./datanodeDockerfile
+    image: raanglada/hadoop-datanode
+    container_name: datanode-nodemanager
+    #restart: always    
+    

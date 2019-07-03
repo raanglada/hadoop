@@ -1,8 +1,8 @@
 #!/usr/bin/bash
 
-#install helm and needed rbac
+#install helm
 
-source envars.sh
+. envars.sh
 
 kubectl create serviceaccount --namespace kube-system tiller
 kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller

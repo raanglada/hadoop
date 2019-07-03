@@ -1,7 +1,7 @@
 #!/usr/bin/bash -v
 #You need aws access granted to execute sucessfully the current script
 
-source envars.sh
+. envars.sh
 
 #create cluster
 kops create cluster \
