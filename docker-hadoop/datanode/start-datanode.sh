@@ -3,4 +3,4 @@
 hdfs datanode -format
 hdfs datanode
 
-tailf -f /dev/null
+tail -f /dev/null
