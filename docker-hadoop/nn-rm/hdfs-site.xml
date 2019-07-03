@@ -16,7 +16,7 @@
 
 <!-- Put site-specific property overrides in this file. -->
 
-<configuration>
+<configuration> 
  <property>
   <name>dfs.replication</name>
   <value>2</value>
@@ -24,8 +24,7 @@
  <property>
   <name>dfs.permission</name>
   <value>false</value>
- </property> 
- </property>
+ </property>  
  <property>
   <name>dfs.name.dir</name>
   <value>file:///home/hadoop/hdfs/namenode</value>
