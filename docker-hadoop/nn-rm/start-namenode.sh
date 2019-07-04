@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "127.0.0.1    namenode" >> /etc/hosts
+
 hdfs namenode -format
 /etc/init.d/ssh start
 
