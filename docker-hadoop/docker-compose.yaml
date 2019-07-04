@@ -16,6 +16,6 @@ services:
       context: .
       dockerfile: ./datanode/Dockerfile
     image: raanglada/hadoop-datanode    
-    restart: always       
+    restart: always    
       
     

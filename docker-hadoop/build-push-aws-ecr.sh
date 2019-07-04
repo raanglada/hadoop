@@ -1,6 +1,7 @@
 !#/usr/bin/env bash
 
-#TODO
+#you need awscli installed and iam permissions
+
 
 
 
