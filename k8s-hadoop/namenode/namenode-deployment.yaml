@@ -1,0 +1,36 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nn-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: namenode
+  template:
+    metadata:
+      labels:
+        app: namenode    
+    spec:
+      containers:
+      - name: namenode
+        image: raanglada/hadoop-namenode:2.9.2
+        ports:
+         - containerPort: 9000
+         - containerPort: 50070        
+         - containerPort: 8088
+         - containerPort: 19888
+         - containerPort: 50010
+         - containerPort: 50020
+         - containerPort: 50075
+         - containerPort: 50090
+         - containerPort: 8020
+
+        # resources:
+        #   requests:
+        #     memory: "1024Mi"
+        #     cpu: "25m"
+        #   limits:
+        #     memory: "2048Mi"
+        #     cpu: "50m"

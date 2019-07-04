@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: datanode-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: datanode
+  template:
+    metadata:
+      labels:
+        app: datanode
+    spec:      
+      containers:
+      - name: namenode
+        image: raanglada/hadoop-datanode:2.9.2
+        ports:
+        - containerPort: 8030        
+        - containerPort: 8031
+        - containerPort: 8032
+        - containerPort: 8033
+        - containerPort: 8040
+        - containerPort: 8042
+
+        # resources:
+        #   requests:
+        #     memory: "1024Mi"
+        #     cpu: "25m"
+        #   limits:
+        #     memory: "2048Mi"
+        #     cpu: "50m"

@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: namenode
+spec:
+  type: NodePort
+  selector:
+    app: namenode
+  ports:
+    - name: hdfs
+      port: 9000
+      targetPort: 9000
+    - name: nn-ui
+      port: 50070
+      targetPort: 50070
+    - name: yarn-ui
+      port: 8088
+      targetPort: 8088
+
