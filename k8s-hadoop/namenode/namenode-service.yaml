@@ -3,7 +3,6 @@ kind: Service
 metadata:
   name: namenode
 spec:
-  type: NodePort
   selector:
     app: namenode
   ports:
@@ -16,4 +15,8 @@ spec:
     - name: yarn-ui
       port: 8088
       targetPort: 8088
+    - name: yarn-server
+      port: 8031
+      targetPort: 8031
+       
 
