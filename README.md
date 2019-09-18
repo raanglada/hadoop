@@ -17,7 +17,9 @@ docker-compose scale datanode=1
 When you scale down datanodes you need to execute a gracefully decomissioning, please read the following posts
 
 https://stackoverflow.com/questions/16774439/how-do-i-correctly-remove-nodes-in-hadoop
+
 https://acadgild.com/blog/commissioning-and-decommissioning-of-datanode-in-hadoop
+
 https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/GracefulDecommission.html
 
 
