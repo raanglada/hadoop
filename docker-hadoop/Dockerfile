@@ -1,10 +1,10 @@
-From debian:latest
+From ubuntu:18.04
 
-MAINTAINER Anglada <anglada.alex@gmail.com>
+MAINTAINER Ramon Anglada <anglada.alex@gmail.com>
 
 LABEL Description="Base image for hadoop cluster"
 
-ARG HADOOP_VERSION=
+ARG HADOOP_VERSION=2.9.2
 
 #env vars needed
 ENV HADOOP_HOME /opt/hadoop
@@ -28,7 +28,6 @@ RUN \
   apt-get update && \
   apt-get install -y \
   ssh \  
-  nano \
   openjdk-8-jdk \
   wget \
   openssh-server \
@@ -50,23 +49,14 @@ RUN \
   cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys && \
   chmod 0600 ~/.ssh/authorized_keys
 
-#COPY ssh config
-# copy ssh config
-ADD confs-files/ssh-config /root/.ssh/config
-
 #COPY confs-files
-ADD confs-files/core-site.xml $HADOOP_HOME/etc/hadoop/
-ADD confs-files/mapred-site.xml $HADOOP_HOME/etc/hadoop/
-ADD confs-files/yarn-site.xml $HADOOP_HOME/etc/hadoop/
+COPY confs-files/core-site.xml $HADOOP_HOME/etc/hadoop/
+COPY confs-files/mapred-site.xml $HADOOP_HOME/etc/hadoop/
+COPY confs-files/yarn-site.xml $HADOOP_HOME/etc/hadoop/
 
-# Hdfs ports
-EXPOSE 50010 50020 50070 50075 50090 8020 9000
+#extra tools for debugging and troubleshooting
+RUN apt install curl net-tools nano telnet -y
 
-# Mapred ports
-EXPOSE 19888
-
-#Yarn ports
-EXPOSE 8030 8031 8032 8033 8040 8042 8088
-
-#Other ports
-EXPOSE 49707 2122
+#COPY ssh config
+COPY confs-files/ssh-config /root/.ssh/config
+RUN chmod 0600 /root/.ssh/config
