@@ -1,7 +1,7 @@
 #!/bin/bash
 
 hdfs datanode -format
-#hdfs datanode
+/etc/init.d/ssh start
 
 hadoop-daemon.sh start datanode
 yarn-daemon.sh start nodemanager
