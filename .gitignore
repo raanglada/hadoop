@@ -4,4 +4,4 @@
 test*
 kubeconfig.yaml
 TODO
-ssh-key/*
+docker-hadoop/ssh-key/*
