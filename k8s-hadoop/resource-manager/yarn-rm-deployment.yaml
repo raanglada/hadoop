@@ -1,0 +1,29 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yarn-rm-deployment
+spec:  
+  replicas: 1
+  selector:
+    matchLabels:
+      app: yarn-rm-app
+  template:
+    metadata:
+      labels:
+        app: yarn-rm-app    
+    spec:
+      containers:
+      - name: yarn-rm-app
+        image: raanglada/hadoop-resource-manager:2.9.2
+        imagePullPolicy: IfNotPresent
+        ports:                
+         - containerPort: 19888
+         - containerPort: 8088
+         - containerPort: 22
+         - containerPort: 8030
+         - containerPort: 8031
+         - containerPort: 8032
+         - containerPort: 8033
+         - containerPort: 8090
+

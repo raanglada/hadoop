@@ -1,44 +1,33 @@
 
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: nn-deployment
-spec:
-  serviceName: "namenode"
+spec:  
   replicas: 1
   selector:
     matchLabels:
-      app: namenode
+      app: namenode-app
   template:
     metadata:
       labels:
-        app: namenode    
+        app: namenode-app    
     spec:
       containers:
-      - name: namenode
+      - name: namenode-app
         image: raanglada/hadoop-namenode:2.9.2
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         ports:
          - containerPort: 9000
          - containerPort: 50070                 
          - containerPort: 19888
-         - containerPort: 50010
-         - containerPort: 50020
-         - containerPort: 50075
-         - containerPort: 50090
          - containerPort: 8088
-         - containerPort: 8020
-         - containerPort: 8030
+         - containerPort: 22
          - containerPort: 8031
-         - containerPort: 8032
-         - containerPort: 8033
-         - containerPort: 8040
-         - containerPort: 8042
-
-        resources:
-          requests:
-            memory: "1024Mi"
-            cpu: "25m"
-          limits:
-            memory: "2048Mi"
-            cpu: "50m"
+#        resources:
+#          requests:
+#            memory: "1024Mi"
+#            cpu: "25m"
+#          limits:
+#            memory: "2048Mi"
+#            cpu: "50m"
