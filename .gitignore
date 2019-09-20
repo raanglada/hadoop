@@ -3,3 +3,5 @@
 *.pyc
 test*
 kubeconfig.yaml
+TODO
+ssh-key/*
