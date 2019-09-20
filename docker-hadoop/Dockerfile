@@ -43,20 +43,22 @@ RUN \
   echo "PATH=$PATH:$HADOOP_HOME/bin" >> ~/.bashrc && \
   rm hadoop-${HADOOP_VERSION}.tar.gz
 
-# Passwordless SSH
-RUN \
-  ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa && \
-  cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys && \
-  chmod 0600 ~/.ssh/authorized_keys
+#extra tools for debugging and troubleshooting
+RUN apt install curl net-tools nano telnet -y
 
 #COPY confs-files
 COPY confs-files/core-site.xml $HADOOP_HOME/etc/hadoop/
 COPY confs-files/mapred-site.xml $HADOOP_HOME/etc/hadoop/
 COPY confs-files/yarn-site.xml $HADOOP_HOME/etc/hadoop/
 
-#extra tools for debugging and troubleshooting
-RUN apt install curl net-tools nano telnet -y
-
 #COPY ssh config
 COPY confs-files/ssh-config /root/.ssh/config
-RUN chmod 0600 /root/.ssh/config
+COPY ssh-key/id_rsa.pub /root/
+
+RUN \
+    mkdir -p ~/.ssh/ && \    
+    cat ~/id_rsa.pub >> ~/.ssh/authorized_keys && \
+    chmod 0600 ~/.ssh/authorized_keys && \
+    chmod 0600 /root/.ssh/config
+
+

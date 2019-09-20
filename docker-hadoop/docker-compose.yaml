@@ -4,7 +4,7 @@ services:
     container_name: namenode
     build:
       context: .      
-      dockerfile: ./nn-rm/Dockerfile 
+      dockerfile: ./namenode/Dockerfile 
     image: raanglada/hadoop-namenode:2.9.2    
     restart: always
     extra_hosts:    
@@ -13,22 +13,39 @@ services:
       hadoop-network:
         ipv4_address: 192.168.0.10
     ports:
-      - "8088:8088"
       - "50070:50070"      
-      - "19888:19888"
       - "9000:9000"
-
+  resource-manager:
+    container_name: resource-manager
+    build:
+      context: .      
+      dockerfile: ./resource-manager/Dockerfile 
+    image: raanglada/hadoop-resource-manager:2.9.2    
+    restart: always
+    extra_hosts:    
+      - "namenode:192.168.0.10"
+    networks:
+      hadoop-network:
+        ipv4_address: 192.168.0.11
+    ports:
+      - "8088:8088"          
+      - "19888:19888"
+      - "8090:8090"
+      - "8030:8030"
+      - "8031:8031"
+      - "8032:8032"
+      - "8033:8033"
   datanode:    
     build:
       context: .
-      dockerfile: namenode./datanode/Dockerfile
+      dockerfile: ./datanode/Dockerfile
     image: raanglada/hadoop-datanode:2.9.2    
     restart: always
     networks:
       hadoop-network:
     extra_hosts:    
       - "namenode:192.168.0.10"
-      
+      - "yarn:192.168.0.11"  
 networks:
   hadoop-network:
     driver: bridge
