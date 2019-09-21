@@ -1,4 +1,12 @@
 
+# Deploy the hadoop cluster
+```
+kubectl apply -f namenode/
+kubectl apply -f resource-manager/
+kubectl apply -f datanode/
+```
+
+
 # Access to the cluster with kubectl port-forward
 
 - dashboard namenode
