@@ -7,7 +7,7 @@ kubectl apply -f datanode/
 ```
 
 
-# Access to the cluster with kubectl port-forward
+# Local access to the cluster with kubectl port-forward
 
 - dashboard namenode
 
@@ -19,3 +19,11 @@ kubectl port-forward pod/nombrepod 50070:50070
 ```
 kubectl port-forward pod/nombrepod 8088:8088
 ```
+
+# Test in the browser
+
+url --> localhost:50070
+url --> localhost:8088
+
+
+
