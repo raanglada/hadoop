@@ -25,6 +25,7 @@ note: use --address 0.0.0.0 with port-forward to publish for all network interfa
 # Test in the browser
 
 url --> localhost:50070
+
 url --> localhost:8088
 
 
