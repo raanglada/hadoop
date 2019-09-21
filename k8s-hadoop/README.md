@@ -20,6 +20,8 @@ kubectl port-forward pod/nombrepod 50070:50070
 kubectl port-forward pod/nombrepod 8088:8088
 ```
 
+note: use --address 0.0.0.0 with port-forward to publish for all network interfaces
+
 # Test in the browser
 
 url --> localhost:50070
