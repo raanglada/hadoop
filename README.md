@@ -2,6 +2,16 @@
 
 This repo is for doing PoC of hadoop using docker and kubernetes.
 
+# Execute the docker-compose 
+```
+docker-compose up
+```
+
+# Delete the docker-compose 
+```
+docker-compose down
+```
+
 # Scale up and down
 
 To scale up more datanodes
